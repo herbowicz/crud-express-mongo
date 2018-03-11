@@ -5,7 +5,8 @@ const MongoClient = require('mongodb').MongoClient
 
 var db
 
-MongoClient.connect('mongodb://zellwk:zellwk@ds047955.mongolab.com:47955/star-wars-quotes', (err, database) => {
+MongoClient.connect('mongodb://cruder:crud123@ds123658.mlab.com:23658/crud', (err, database) => {
+
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000, () => {
@@ -21,6 +22,7 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   db.collection('quotes').find().toArray((err, result) => {
     if (err) return console.log(err)
+    console.log(result)
     res.render('index.ejs', {quotes: result})
   })
 })
